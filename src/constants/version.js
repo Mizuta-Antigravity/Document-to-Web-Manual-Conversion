@@ -1,6 +1,14 @@
-export const VERSION = "1.2.5";
+export const VERSION = "1.3.0";
 
 export const VERSION_HISTORY = [
+  {
+    version: "1.3.0",
+    date: "2026-05-14",
+    changes: [
+      "画像の自動挿入機能を無効化（外部APIの不安定さによる文字残り問題を根本解決）",
+      "アイコン（Lucide Icons）はそのまま引き続き動作します"
+    ]
+  },
   {
     version: "1.2.5",
     date: "2026-05-14",

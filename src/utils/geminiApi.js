@@ -44,7 +44,6 @@ export const restructureTextToManual = async (text, apiKey) => {
 2. **階層構造とアイコンの明確化**: 
    - H1 (\`#\`), H2 (\`##\`), H3 (\`###\`) のすべての見出しの冒頭には、その内容に最も適した**デザイナーズアイコン名**を必ず1つ含めてください。形式は \`[ICON: icon-name]\` としてください。(例: ## [ICON: settings] 初期設定)
    - アイコン名は Lucide Icons (https://lucide.dev/icons) に準拠したもの（例: user, file-text, shield, check-circle, activity 等）を選んでください。
-   - H2見出しの直後に、画像生成用のキーワード \`[IMAGE_KEYWORD: keyword]\` を含めるルールは継続してください。
 3. **視覚的なアラートの使用**: 以下の意味に合わせてGitHub風のブロッククォートを使用してください。
    - 重要な内容・必須事項: \`> [!IMPORTANT]\` (文中に [ICON: alert-circle] などのタグを適宜使用)
    - ヒント・推奨事項: \`> [!TIP]\` または \`> [!NOTE]\` (文中に [ICON: lightbulb] などのタグを適宜使用)
