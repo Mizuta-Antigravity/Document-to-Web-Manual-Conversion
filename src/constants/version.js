@@ -1,6 +1,15 @@
-export const VERSION = "1.2.3";
+export const VERSION = "1.2.4";
 
 export const VERSION_HISTORY = [
+  {
+    version: "1.2.4",
+    date: "2026-05-14",
+    changes: [
+      "画像の置換アルゴリズムを多層化し、エスケープされたタグも確実に置換するように強化",
+      "より安定したUnsplash画像サーバーへの切り替え",
+      "すべての置換処理で大文字小文字を無視するように改善"
+    ]
+  },
   {
     version: "1.2.3",
     date: "2026-05-14",
