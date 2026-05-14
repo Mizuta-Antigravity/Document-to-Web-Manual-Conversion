@@ -4,9 +4,10 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
  * 抽出したテキストをGemini APIを用いてマニュアル構造（Markdown）に再構成する
  * @param {string} text 抽出された生テキスト
  * @param {string} apiKey ユーザーが入力したGemini APIキー
+ * @param {function} onChunk チャンク受信時のコールバック
  * @returns {Promise<string>} 再構成されたMarkdownテキスト
  */
-export const restructureTextToManual = async (text, apiKey) => {
+export const restructureTextToManual = async (text, apiKey, onChunk) => {
   if (!apiKey) {
     throw new Error('APIキーが設定されていません。');
   }
@@ -56,18 +57,25 @@ export const restructureTextToManual = async (text, apiKey) => {
 6. **純粋なMarkdown出力**: \`\`\`markdown のようなコードブロックのバッククォートは絶対に出力に含めず、純粋なMarkdownテキストのみを出力してください。
 
 【抽出されたテキスト】
-${text.substring(0, 80000)}
+${text.substring(0, 40000)}
 `;
 
   try {
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
-    let markdownText = response.text();
+    // ストリーミングで生成（逐次的に結果を受け取る）
+    const streamResult = await model.generateContentStream(prompt);
     
+    let fullText = '';
+    for await (const chunk of streamResult.stream) {
+      const chunkText = chunk.text();
+      fullText += chunkText;
+      // コールバックで途中経過を通知
+      if (onChunk) onChunk(fullText);
+    }
+
     // もし ```markdown ... ``` で囲まれていたら取り除く
-    markdownText = markdownText.replace(/^```markdown\s*/i, '').replace(/```\s*$/i, '');
+    fullText = fullText.replace(/^```markdown\s*/i, '').replace(/```\s*$/i, '');
     
-    return markdownText;
+    return fullText;
   } catch (error) {
     console.error('Gemini API Error:', error);
     throw new Error(`AI処理中にエラーが発生しました: ${error.message}`);

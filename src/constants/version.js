@@ -1,6 +1,15 @@
-export const VERSION = "1.3.1";
+export const VERSION = "1.3.2";
 
 export const VERSION_HISTORY = [
+  {
+    version: "1.3.2",
+    date: "2026-05-14",
+    changes: [
+      "アイコンの改行問題を修正（見出し・箇条書き内でインライン表示されるように改善）",
+      "ストリーミング生成を導入（AIの応答が届き次第、プレビューにリアルタイム表示）",
+      "入力テキストの上限を40,000文字に最適化（処理速度が向上）"
+    ]
+  },
   {
     version: "1.3.1",
     date: "2026-05-14",

@@ -83,7 +83,9 @@ function App() {
       let markdown = '';
       if (useAI) {
         setLoadingStep('AIがマニュアルを構成中 (約1〜2分)...');
-        markdown = await restructureTextToManual(combinedText, apiKey);
+        markdown = await restructureTextToManual(combinedText, apiKey, (chunk) => {
+          setGeneratedMarkdown(chunk); // ストリーミング中に随時プレビューを更新
+        });
       } else {
         setLoadingStep('テキストを自動整形中...');
         markdown = restructureTextLocally(combinedText);
