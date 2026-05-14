@@ -1,6 +1,14 @@
-export const VERSION = "1.1.0";
+export const VERSION = "1.1.1";
 
 export const VERSION_HISTORY = [
+  {
+    version: "1.1.1",
+    date: "2026-05-14",
+    changes: [
+      "AI処理エラーの日本語翻訳表示機能を追加",
+      "503 (混雑) や 401 (認証エラー) 等の具体的な対処方法を提示"
+    ]
+  },
   {
     version: "1.1.0",
     date: "2026-05-14",

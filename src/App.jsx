@@ -22,6 +22,31 @@ function App() {
   const [generatedMarkdown, setGeneratedMarkdown] = useState('');
   const [error, setError] = useState(null);
 
+  // エラーメッセージをユーザーフレンドリーな日本語に翻訳する
+  const translateError = (originalError) => {
+    if (!originalError) return null;
+    const msg = originalError.toString();
+    
+    let translated = "予期せぬエラーが発生しました。しばらく経ってから再度お試しください。";
+    
+    if (msg.includes("503") || msg.includes("high demand")) {
+      translated = "現在、AIモデルの利用が集中しており、一時的に利用できません。数分待ってからもう一度実行してください。";
+    } else if (msg.includes("401") || msg.includes("API key not valid")) {
+      translated = "APIキーが正しくないか、無効になっています。APIキー設定を再確認してください。";
+    } else if (msg.includes("404")) {
+      translated = "指定されたAIモデルが見つかりません。最新のGemini 1.5 Flashなどが利用可能か確認してください。";
+    } else if (msg.includes("429")) {
+      translated = "無料枠の利用制限に達しました。少し時間を置いてから再度お試しください。";
+    }
+
+    return (
+      <div className="flex flex-col space-y-1">
+        <span className="font-bold">{translated}</span>
+        <span className="text-xs opacity-70">原文: {msg}</span>
+      </div>
+    );
+  };
+
   useEffect(() => {
     if (generatedMarkdown && window.lucide) {
       window.lucide.createIcons();
@@ -91,7 +116,7 @@ function App() {
         {error && (
           <div className="mb-8 bg-red-50 border border-red-200 text-red-700 px-6 py-4 rounded-xl flex items-start animate-in slide-in-from-top-4 duration-300">
             <AlertCircle className="w-5 h-5 mr-3 mt-0.5 flex-shrink-0" />
-            <p className="text-sm font-medium">{error}</p>
+            <div className="text-sm">{translateError(error)}</div>
           </div>
         )}
 
