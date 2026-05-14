@@ -7,7 +7,8 @@ export const formatMarkdownToHtml = (markdown, parseFn) => {
 
   // 画像キーワードタグをUnsplash画像に置換 (Markdownの状態で置換)
   processed = processed.replace(/\[IMAGE_KEYWORD:\s*([^\]]+)\]/g, (match, keyword) => {
-    return `\n<img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1200&q=80&keywords=${encodeURIComponent(keyword.trim())}" class="manual-image" alt="${keyword.trim()}">\n`;
+    const k = keyword.trim();
+    return `\n<img src="https://source.unsplash.com/featured/1200x600/?${encodeURIComponent(k)},business,manual" class="manual-image" alt="${k}">\n`;
   });
 
   // ICONタグをLucideアイコンに置換
