@@ -1,6 +1,14 @@
-export const VERSION = "1.1.2";
+export const VERSION = "1.2.0";
 
 export const VERSION_HISTORY = [
+  {
+    version: "1.2.0",
+    date: "2026-05-14",
+    changes: [
+      "PDFエクスポート機能の追加（エクスポート後のHTMLからPDF印刷が可能に）",
+      "印刷用レイアウトの最適化（ナビゲーションの自動非表示、改ページ制御）"
+    ]
+  },
   {
     version: "1.1.2",
     date: "2026-05-14",

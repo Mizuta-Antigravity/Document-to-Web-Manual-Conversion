@@ -358,6 +358,77 @@ export const downloadAsHtml = (markdown, title = 'Webマニュアル') => {
       .cover-page h1 { font-size: 2rem; }
       .main-inner { padding: 0 24px 80px; }
     }
+
+    /* Print Styles for PDF */
+    @media print {
+      header, aside, .sidebar-overlay, .search-container, .menu-toggle, .btn-print {
+        display: none !important;
+      }
+      .layout {
+        margin-top: 0 !important;
+        display: block !important;
+      }
+      main {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+        min-height: auto !important;
+      }
+      .main-inner {
+        padding: 0 !important;
+        max-width: 100% !important;
+      }
+      .cover-page {
+        padding: 100px 40px !important;
+        background: #f8fafc !important;
+        color: #1e3a8a !important;
+        border: 2px solid #e2e8f0 !important;
+        page-break-after: always;
+      }
+      .cover-page h1 { text-shadow: none !important; }
+      .markdown-body h2 {
+        page-break-before: always;
+        margin-top: 2rem !important;
+      }
+      .markdown-body h1, .markdown-body h2, .markdown-body h3 {
+        color: #000 !important;
+      }
+      body {
+        background: #fff !important;
+        color: #000 !important;
+        font-size: 12pt;
+      }
+      .manual-image {
+        max-height: 500px !important;
+        page-break-inside: avoid;
+      }
+      details {
+        border: 1px solid #ccc !important;
+      }
+      summary {
+        list-style: none !important;
+      }
+    }
+    
+    .btn-print {
+      background: var(--bg-body);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .btn-print:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
   `;
 
   // JS for Interactions
@@ -520,6 +591,10 @@ export const downloadAsHtml = (markdown, title = 'Webマニュアル') => {
       <span class="search-icon">🔍</span>
       <input type="text" id="search-input" class="search-input" placeholder="マニュアル内検索...">
     </div>
+    <button id="btn-print" class="btn-print">
+      <i data-lucide="printer" style="width: 16px; height: 16px;"></i>
+      PDF
+    </button>
   </header>
 
   <div class="sidebar-overlay"></div>
@@ -556,6 +631,12 @@ export const downloadAsHtml = (markdown, title = 'Webマニュアル') => {
   <script src="https://unpkg.com/lucide@latest"></script>
   <script>
     ${script}
+    
+    // PDF Print functionality
+    document.getElementById('btn-print').addEventListener('click', () => {
+      window.print();
+    });
+
     // Initialize icons
     lucide.createIcons();
   </script>
