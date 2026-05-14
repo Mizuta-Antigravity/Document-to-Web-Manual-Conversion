@@ -63,7 +63,7 @@ const PreviewArea = ({
             <div 
               className="prose prose-slate prose-blue max-w-none prose-headings:font-bold prose-h1:text-3xl prose-h2:text-2xl prose-a:text-blue-600 mx-auto"
               dangerouslySetInnerHTML={{ 
-                __html: formatMarkdownToHtml(marked.parse(generatedMarkdown))
+                __html: formatMarkdownToHtml(generatedMarkdown, marked.parse)
               }}
             />
           )}

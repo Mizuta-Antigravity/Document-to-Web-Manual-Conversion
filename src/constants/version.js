@@ -1,6 +1,14 @@
-export const VERSION = "1.2.0";
+export const VERSION = "1.2.1";
 
 export const VERSION_HISTORY = [
+  {
+    version: "1.2.1",
+    date: "2026-05-14",
+    changes: [
+      "画像タグが置換されずにそのまま表示される不具合を修正",
+      "タグの置換タイミングをHTML変換前に変更し、より確実に画像が表示されるように改善"
+    ]
+  },
   {
     version: "1.2.0",
     date: "2026-05-14",

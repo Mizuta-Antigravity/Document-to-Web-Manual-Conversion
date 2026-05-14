@@ -8,7 +8,7 @@ import { formatMarkdownToHtml } from './formatter';
  */
 export const downloadAsHtml = (markdown, title = 'Webマニュアル') => {
   // MarkdownをHTMLに変換し、独自タグを処理
-  let htmlContent = formatMarkdownToHtml(marked.parse(markdown));
+  let htmlContent = formatMarkdownToHtml(markdown, marked.parse);
 
   // 今日の日付
   const today = new Date().toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' });
