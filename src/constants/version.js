@@ -1,14 +1,6 @@
-export const VERSION = "1.2.6";
+export const VERSION = "1.2.5";
 
 export const VERSION_HISTORY = [
-  {
-    version: "1.2.6",
-    date: "2026-05-14",
-    changes: [
-      "画像サービスをUnsplashからLorem Picsumに変更（安定性・多様性が大幅に向上）",
-      "キーワードのhash値をseedに使い、同じキーワードは同じ画像・違うキーワードは違う画像を確実に表示"
-    ]
-  },
   {
     version: "1.2.5",
     date: "2026-05-14",
