@@ -3,27 +3,29 @@
  */
 
 export const formatMarkdownToHtml = (markdown, parseFn) => {
-  // 1. まずMarkdownの状態で置換を試みる
+  // 1. Markdownの状態で置換
+  // 置換後のHTMLがmarkedによってエスケープされないよう、前後に十分な改行を入れる
   let processed = markdown.replace(/\[IMAGE_KEYWORD:\s*([^\]]+)\]/gi, (match, keyword) => {
     const k = keyword.trim();
-    // より安定した新しいUnsplashの検索URL形式
-    return `\n\n<div class="manual-image-container"><img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1200&q=80&q=keywords=${encodeURIComponent(k)}" class="manual-image" alt="${k}"></div>\n\n`;
+    // sigパラメータにキーワードを含めることで、キーワードごとに異なる画像を取得し、かつキャッシュを避ける
+    const imageUrl = `https://source.unsplash.com/featured/1200x600/?${encodeURIComponent(k)},business,office&sig=${Math.random()}`;
+    return `\n\n<div class="manual-image-container"><img src="${imageUrl}" class="manual-image" alt="${k}"></div>\n\n`;
   });
 
-  // ICONタグをLucideアイコンに置換
+  // ICONタグを置換
   processed = processed.replace(/\[ICON:\s*([a-z0-9-]+)\]/gi, (match, iconName) => {
     return `<i data-lucide="${iconName}" class="manual-icon"></i>`;
   });
 
-  // markedでHTMLに変換
+  // HTMLに変換
   let html = parseFn(processed);
 
-  // 2. 万が一HTML化でエスケープされていた場合の念押し置換
-  // [&amp;#91;IMAGE_KEYWORD: ...&amp;#93;] などのパターンをカバー
+  // 2. 念押し置換（HTML化でエスケープされた場合用）
   const tagRegex = /(?:\[|&#91;|%5B)IMAGE_KEYWORD:\s*([^\]&%]+)(?:\]|&#93;|%5D)/gi;
   html = html.replace(tagRegex, (match, keyword) => {
     const k = keyword.trim();
-    return `<div class="manual-image-container"><img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1200&q=80&q=keywords=${encodeURIComponent(k)}" class="manual-image" alt="${k}"></div>`;
+    const imageUrl = `https://source.unsplash.com/featured/1200x600/?${encodeURIComponent(k)},business,office&sig=${Math.random()}`;
+    return `<div class="manual-image-container"><img src="${imageUrl}" class="manual-image" alt="${k}"></div>`;
   });
 
   // GitHubスタイルのアラートを変換

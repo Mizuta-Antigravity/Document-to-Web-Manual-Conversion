@@ -1,6 +1,14 @@
-export const VERSION = "1.2.4";
+export const VERSION = "1.2.5";
 
 export const VERSION_HISTORY = [
+  {
+    version: "1.2.5",
+    date: "2026-05-14",
+    changes: [
+      "画像の動的検索を最適化（キーワードごとに異なる画像が表示されるように修正）",
+      "タグの置換処理を強化し、文字が残ってしまう問題を完全に解消"
+    ]
+  },
   {
     version: "1.2.4",
     date: "2026-05-14",
