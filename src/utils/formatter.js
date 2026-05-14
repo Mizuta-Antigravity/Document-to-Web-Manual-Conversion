@@ -4,19 +4,20 @@
  */
 
 export const formatMarkdownToHtml = (markdown, parseFn) => {
-  // 1. IMAGE_KEYWORD タグを完全に除去（画像表示なし）
+  // 1. IMAGE_KEYWORD タグを完全に除去
   let step1 = markdown.replace(/\[IMAGE_KEYWORD:\s*([^\]]+)\]/gi, '');
 
-  // 2. ICONタグをプレースホルダーに保護してからHTML変換する
+  // 2. ICONタグをMarkdownに壊されないプレースホルダーに置換
+  //    ※ __ はMarkdownの太字記法と衝突するため XICON{ } 形式を使用
   step1 = step1.replace(/\[ICON:\s*([a-z0-9-]+)\]/gi, (match, iconName) => {
-    return `__ICON_REQ_START__${iconName.trim()}__ICON_REQ_END__`;
+    return `XICON{${iconName.trim()}}`;
   });
 
   // 3. HTMLに変換
   let html = parseFn(step1);
 
   // 4. プレースホルダーをLucideアイコンに変換
-  html = html.replace(/__ICON_REQ_START__(.*?)__ICON_REQ_END__/g, (match, iconName) => {
+  html = html.replace(/XICON\{([a-z0-9-]+)\}/g, (match, iconName) => {
     return `<i data-lucide="${iconName}" class="manual-icon"></i>`;
   });
 

@@ -1,6 +1,14 @@
-export const VERSION = "1.3.0";
+export const VERSION = "1.3.1";
 
 export const VERSION_HISTORY = [
+  {
+    version: "1.3.1",
+    date: "2026-05-14",
+    changes: [
+      "アイコンが表示されない不具合を修正（Markdownの太字記法との衝突を解消）",
+      "プレースホルダー形式を XICON{} 形式に変更し、確実にアイコンが表示されるように改善"
+    ]
+  },
   {
     version: "1.3.0",
     date: "2026-05-14",
