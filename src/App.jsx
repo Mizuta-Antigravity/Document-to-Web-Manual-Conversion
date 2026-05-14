@@ -156,17 +156,19 @@ function App() {
                 </div>
                 
                 {useAI ? (
-                  <div className="bg-blue-50/50 border border-blue-100 rounded-xl p-5">
-                    <p className="text-sm text-slate-600 mb-4">Gemini APIキーを入力してください（ブラウザにのみ保存されます）</p>
-                    <input 
-                      type="password"
-                      value={apiKey}
-                      onChange={handleApiKeyChange}
-                      placeholder="AIzaSy..."
-                      className="w-full px-4 py-3 bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-sm font-mono shadow-sm"
-                    />
-                  </div>
-                  <ApiKeyGuide />
+                  <>
+                    <div className="bg-blue-50/50 border border-blue-100 rounded-xl p-5">
+                      <p className="text-sm text-slate-600 mb-4">Gemini APIキーを入力してください（ブラウザにのみ保存されます）</p>
+                      <input 
+                        type="password"
+                        value={apiKey}
+                        onChange={handleApiKeyChange}
+                        placeholder="AIzaSy..."
+                        className="w-full px-4 py-3 bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-sm font-mono shadow-sm"
+                      />
+                    </div>
+                    <ApiKeyGuide />
+                  </>
                 ) : (
                   <div className="bg-slate-50 border border-slate-200 rounded-xl p-5">
                     <p className="text-sm text-slate-600">AIを使用せず、簡易的なルールで自動整形して出力します。</p>
