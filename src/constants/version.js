@@ -1,6 +1,14 @@
-export const VERSION = "1.2.5";
+export const VERSION = "1.2.6";
 
 export const VERSION_HISTORY = [
+  {
+    version: "1.2.6",
+    date: "2026-05-14",
+    changes: [
+      "プレースホルダー方式による画像置換の完全安定化（文字残りと画像重複を同時に解消）",
+      "Markdownパーサーによるタグの破損を100%防止する仕組みを導入"
+    ]
+  },
   {
     version: "1.2.5",
     date: "2026-05-14",
