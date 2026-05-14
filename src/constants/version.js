@@ -1,6 +1,14 @@
-export const VERSION = "1.2.2";
+export const VERSION = "1.2.3";
 
 export const VERSION_HISTORY = [
+  {
+    version: "1.2.3",
+    date: "2026-05-14",
+    changes: [
+      "画像タグの認識精度を大幅に向上（改行が含まれない場合でも確実に置換）",
+      "画像の大文字・小文字の区別を無くし、タグの検出漏れを防止"
+    ]
+  },
   {
     version: "1.2.2",
     date: "2026-05-14",

@@ -6,9 +6,11 @@ export const formatMarkdownToHtml = (markdown, parseFn) => {
   let processed = markdown;
 
   // 画像キーワードタグをUnsplash画像に置換 (Markdownの状態で置換)
-  processed = processed.replace(/\[IMAGE_KEYWORD:\s*([^\]]+)\]/g, (match, keyword) => {
+  // [IMAGE_KEYWORD: text] という形式を柔軟に探す
+  processed = processed.replace(/\[IMAGE_KEYWORD:\s*([^\]]+)\]/gi, (match, keyword) => {
     const k = keyword.trim();
-    return `\n<img src="https://source.unsplash.com/featured/1200x600/?${encodeURIComponent(k)},business,manual" class="manual-image" alt="${k}">\n`;
+    // 確実に独立したブロックとして表示されるように前後に改行とdivを挟む
+    return `\n\n<div class="manual-image-container"><img src="https://source.unsplash.com/featured/1200x600/?${encodeURIComponent(k)},business,manual" class="manual-image" alt="${k}"></div>\n\n`;
   });
 
   // ICONタグをLucideアイコンに置換
