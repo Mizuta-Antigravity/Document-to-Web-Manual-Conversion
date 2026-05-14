@@ -1,6 +1,13 @@
-export const VERSION = "1.3.1";
+export const VERSION = "1.3.2";
 
 export const VERSION_HISTORY = [
+  {
+    version: "1.3.2",
+    date: "2026-05-14",
+    changes: [
+      "アイコンの改行問題を修正（見出し・箇条書き内でテキストと同じ行にインライン表示）"
+    ]
+  },
   {
     version: "1.3.1",
     date: "2026-05-14",
