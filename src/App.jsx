@@ -4,6 +4,7 @@ import { extractTextFromFiles } from './utils/fileExtractor';
 import { restructureTextToManual } from './utils/geminiApi';
 import { restructureTextLocally } from './utils/localFormatter';
 import { downloadAsHtml } from './utils/exportHtml';
+import { VERSION } from './constants/version';
 
 // 分割したコンポーネントのインポート
 import Header from './components/Header';
@@ -21,6 +22,7 @@ function App() {
   const [loadingStep, setLoadingStep] = useState('');
   const [generatedMarkdown, setGeneratedMarkdown] = useState('');
   const [error, setError] = useState(null);
+  const [isHistoryOpen, setIsHistoryOpen] = useState(false);
 
   // エラーメッセージをユーザーフレンドリーな日本語に翻訳する
   const translateError = (originalError) => {
@@ -80,7 +82,7 @@ function App() {
       
       let markdown = '';
       if (useAI) {
-        setLoadingStep('AIがマニュアルを構成中 (1分ほどかかる場合があります)...');
+        setLoadingStep('AIがマニュアルを構成中 (約1〜2分)...');
         markdown = await restructureTextToManual(combinedText, apiKey);
       } else {
         setLoadingStep('テキストを自動整形中...');
@@ -110,7 +112,12 @@ function App() {
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans">
-      <Header currentStep={currentStep} onLogoClick={reset} />
+      <Header 
+        currentStep={currentStep} 
+        onLogoClick={reset} 
+        version={VERSION}
+        onVersionClick={() => setIsHistoryOpen(true)}
+      />
 
       <main className="max-w-5xl mx-auto px-6 py-12">
         {error && (
@@ -189,7 +196,12 @@ function App() {
         )}
       </main>
 
-      <Footer />
+      <Footer 
+        version={VERSION} 
+        onHistoryClick={() => setIsHistoryOpen(true)}
+        isHistoryOpen={isHistoryOpen}
+        onCloseHistory={() => setIsHistoryOpen(false)}
+      />
     </div>
   );
 }

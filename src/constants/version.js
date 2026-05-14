@@ -1,6 +1,15 @@
-export const VERSION = "1.1.1";
+export const VERSION = "1.1.2";
 
 export const VERSION_HISTORY = [
+  {
+    version: "1.1.2",
+    date: "2026-05-14",
+    changes: [
+      "画像キーワードの置換バグを修正（スペースを含むキーワードに対応）",
+      "ヘッダーのバージョン番号から更新履歴を開けるように改善",
+      "AI処理中の待ち時間目安（約1〜2分）を表示に追加"
+    ]
+  },
   {
     version: "1.1.1",
     date: "2026-05-14",

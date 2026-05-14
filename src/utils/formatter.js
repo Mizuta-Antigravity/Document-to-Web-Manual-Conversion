@@ -14,8 +14,8 @@ export const formatMarkdownToHtml = (html) => {
     '<div class="alert alert-warning"><div class="alert-title">⚠️ 注意</div><div class="alert-content">$1</div></div>');
 
   // 画像キーワードタグをUnsplash画像に置換
-  formatted = formatted.replace(/\[IMAGE_KEYWORD:\s*([a-zA-Z0-9,]+)\]/g, (match, keyword) => {
-    return `<img src="https://source.unsplash.com/featured/1200x600/?${encodeURIComponent(keyword)},business,manual" class="manual-image" alt="${keyword}">`;
+  formatted = formatted.replace(/\[IMAGE_KEYWORD:\s*([a-zA-Z0-9,\s]+)\]/g, (match, keyword) => {
+    return `<img src="https://source.unsplash.com/featured/1200x600/?${encodeURIComponent(keyword.trim())},business,manual" class="manual-image" alt="${keyword.trim()}">`;
   });
 
   // ICONタグをLucideアイコンに置換
